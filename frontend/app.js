@@ -96,6 +96,23 @@ function updateClock() {
 setInterval(updateClock, 1000);
 updateClock();
 
+// ── Mobile Sidebar ──────────────────────────────────────────────────────────────────
+function toggleSidebar() {
+    const sidebar = el('sidebar');
+    const overlay = el('sidebarOverlay');
+    sidebar.classList.toggle('sidebar-open');
+    overlay.classList.toggle('active');
+    document.body.classList.toggle('sidebar-locked');
+}
+
+function closeSidebar() {
+    const sidebar = el('sidebar');
+    const overlay = el('sidebarOverlay');
+    sidebar.classList.remove('sidebar-open');
+    overlay.classList.remove('active');
+    document.body.classList.remove('sidebar-locked');
+}
+
 // ── Tab Switching ──────────────────────────────────────────────────────────────
 const PAGE_TITLES = {
     dashboard: ['Dashboard', 'Your AI-powered productivity command centre'],
@@ -113,6 +130,8 @@ function switchTab(tab, btnEl) {
     if (section) section.classList.add('active');
     if (btnEl) btnEl.classList.add('active');
 
+    // Auto-close sidebar on mobile after selecting a tab
+    if (window.innerWidth <= 768) closeSidebar();
     const [title, sub] = PAGE_TITLES[tab] || [tab, ''];
     el('pageTitle').textContent = title;
     el('pageSubtitle').textContent = sub;

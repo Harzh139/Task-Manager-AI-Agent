@@ -1250,3 +1250,247 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator {
 .completed-section.open .completed-body {
   display: flex;
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   RESPONSIVE — MOBILE FIRST
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Hamburger Button ──────────────────────────────────────────────────── */
+.hamburger {
+  display: none;
+  /* hidden on desktop */
+  background: none;
+  border: 1px solid var(--border2);
+  color: var(--text);
+  font-size: 20px;
+  line-height: 1;
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.2s;
+}
+
+.hamburger:hover {
+  background: var(--surface2);
+}
+
+/* ── Sidebar Overlay ───────────────────────────────────────────────────── */
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(2px);
+  z-index: 99;
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+
+.sidebar-overlay.active {
+  display: block;
+  opacity: 1;
+}
+
+/* Prevent body scroll when sidebar is open */
+body.sidebar-locked {
+  overflow: hidden;
+}
+
+/* ── Tablet & Mobile (≤ 768px) ─────────────────────────────────────────── */
+@media (max-width: 768px) {
+
+  /* Show hamburger */
+  .hamburger {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  /* Sidebar becomes a slide-in drawer */
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 260px;
+    z-index: 100;
+    transform: translateX(-100%);
+    transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+    border-right: 1px solid var(--border2);
+  }
+
+  .sidebar.sidebar-open {
+    transform: translateX(0);
+  }
+
+  /* Main content fills full width */
+  .main-content {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  /* Topbar */
+  .topbar {
+    padding: 12px 16px;
+    gap: 10px;
+  }
+
+  .topbar-left {
+    gap: 10px;
+  }
+
+  .page-title {
+    font-size: 18px;
+  }
+
+  .page-subtitle {
+    display: none;
+  }
+
+  /* hide subtitle on mobile to save space */
+
+  /* Score badge — compact */
+  .score-badge {
+    padding: 5px 10px;
+    font-size: 12px;
+    gap: 4px;
+  }
+
+  .clock {
+    font-size: 12px;
+    padding: 5px 10px;
+  }
+
+  /* Stats grid → 2 columns */
+  .stats-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  /* Two-col panels → single col */
+  .two-col {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Card padding */
+  .card {
+    padding: 16px;
+  }
+
+  /* Section padding */
+  .tab-content.active {
+    padding: 14px;
+    gap: 14px;
+  }
+
+  /* Form rows stack */
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  /* Task chips */
+  .task-chip {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+
+  /* Subtask items */
+  .subtask-item {
+    padding: 14px;
+  }
+
+  .subtask-title {
+    font-size: 14px;
+  }
+
+  /* Section header */
+  .section-header {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  /* Autonomy buttons */
+  .autonomy-buttons {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  /* Goal textarea */
+  .goal-textarea {
+    min-height: 100px;
+  }
+
+  /* Launch button */
+  .launch-btn {
+    padding: 14px;
+    font-size: 15px;
+  }
+
+  /* Action log table → cards feel */
+  .action-table {
+    font-size: 12px;
+  }
+
+  .action-table th,
+  .action-table td {
+    padding: 8px 10px;
+  }
+
+  /* Completed section body */
+  .completed-body {
+    padding: 8px;
+  }
+}
+
+/* ── Small Phones (≤ 480px) ────────────────────────────────────────────── */
+@media (max-width: 480px) {
+
+  /* Stats → full single column */
+  .stats-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .stat-card {
+    padding: 14px 12px;
+  }
+
+  .stat-value {
+    font-size: 28px;
+  }
+
+  /* Hide clock on tiny screens */
+  .clock {
+    display: none;
+  }
+
+  /* Topbar tighter */
+  .topbar {
+    padding: 10px 12px;
+  }
+
+  /* Typography scale-down */
+  .page-title {
+    font-size: 16px;
+  }
+
+  .card-title {
+    font-size: 14px;
+  }
+
+  /* Task chip wrapping */
+  .task-chip {
+    flex-wrap: wrap;
+  }
+
+  .btn-done {
+    width: 100%;
+    text-align: center;
+    margin-top: 6px;
+  }
+
+  /* Tags wrap nicely */
+  .tag {
+    font-size: 10px;
+    padding: 2px 7px;
+  }
+}
