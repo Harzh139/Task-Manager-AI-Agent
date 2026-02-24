@@ -14,10 +14,8 @@ google-auth-oauthlib>=1.2.0
 google-auth-httplib2>=0.2.0
 google-api-python-client>=2.130.0
 
-# FAISS (Vector Memory) + local embeddings (no API key needed)
-faiss-cpu>=1.8.0
-numpy>=1.26.0
-sentence-transformers>=3.0.0    # all-MiniLM-L6-v2 — 384-dim local embeddings
+# Vector Memory — lightweight keyword search (no heavy ML deps)
+# faiss-cpu and sentence-transformers removed: too heavy for 512MB free tier
 
 # HTTP / async
 httpx>=0.27.0
