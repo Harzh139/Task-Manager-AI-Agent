@@ -24,13 +24,13 @@ class AutonomyLevel(str, Enum):
 
 class Settings(BaseSettings):
     # ── Groq ────────────────────────────────────────────────────────────────
-    GROQ_API_KEY: str = Field(..., description="Groq API key")
+    GROQ_API_KEY: str = Field(default="", description="Groq API key")
     GROQ_MODEL: str = Field("llama-3.3-70b-versatile", description="Groq model to use")
     GROQ_TEMPERATURE: float = Field(0.2, description="LLM temperature")
 
     # ── Google OAuth ─────────────────────────────────────────────────────────
-    GOOGLE_CLIENT_ID: str = Field(..., description="Google OAuth client ID")
-    GOOGLE_CLIENT_SECRET: str = Field(..., description="Google OAuth client secret")
+    GOOGLE_CLIENT_ID: str = Field(default="", description="Google OAuth client ID")
+    GOOGLE_CLIENT_SECRET: str = Field(default="", description="Google OAuth client secret")
     GOOGLE_REDIRECT_URI: str = Field(
         "http://localhost:8000/auth/callback",
         description="OAuth redirect URI",

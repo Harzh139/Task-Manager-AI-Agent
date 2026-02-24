@@ -23,6 +23,8 @@ services:
         value: "0"
       - key: OAUTHLIB_RELAX_TOKEN_SCOPE
         value: "1"
+      - key: PYTHONUNBUFFERED
+        value: "1"
     disk:
       name: memory-store
       mountPath: /opt/render/project/src/memory
