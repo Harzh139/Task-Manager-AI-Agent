@@ -1,0 +1,28 @@
+fastapi>=0.111.0
+uvicorn[standard]>=0.29.0
+pydantic>=2.7.0
+pydantic-settings>=2.3.0
+
+# LLM Orchestration
+langgraph>=0.1.14
+langchain-core>=0.2.0
+groq>=0.9.0                      # Groq cloud API (OpenAI-compatible)
+
+# Google APIs
+google-auth>=2.30.0
+google-auth-oauthlib>=1.2.0
+google-auth-httplib2>=0.2.0
+google-api-python-client>=2.130.0
+
+# FAISS (Vector Memory) + local embeddings (no API key needed)
+faiss-cpu>=1.8.0
+numpy>=1.26.0
+sentence-transformers>=3.0.0    # all-MiniLM-L6-v2 — 384-dim local embeddings
+
+# HTTP / async
+httpx>=0.27.0
+aiofiles>=23.2.0
+python-multipart>=0.0.9
+
+# Environment
+python-dotenv>=1.0.0

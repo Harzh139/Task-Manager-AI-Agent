@@ -1,0 +1,160 @@
+{
+  "b0c738a5-d01d-4e62-b2d3-be6644f6ae99": {
+    "goal": "just llok the product wont take more thn 2 seconds",
+    "deadline": "2026-02-24T05:58:00.000Z",
+    "user_email": "sharmaharshu385@gmail.com",
+    "autonomy_level": "assisted",
+    "approved_tasks": [
+      "task_01",
+      "task_02",
+      "task_03"
+    ],
+    "plan": {
+      "goal": "just look the product wont take more thn 2 seconds",
+      "deadline": "2026-02-24T05:58:00.000Z",
+      "total_estimated_hours": 0.2,
+      "subtasks": [
+        {
+          "id": "task_01",
+          "title": "Review past context",
+          "description": "Review past plans and context to understand the current situation.",
+          "estimated_hours": 0.05,
+          "priority": "low",
+          "action_type": "review",
+          "scheduled_start": "2026-02-24T05:59:00.000Z"
+        },
+        {
+          "id": "task_02",
+          "title": "Identify the product",
+          "description": "Identify the product that needs to be looked at and ensure it's the correct one.",
+          "estimated_hours": 0.05,
+          "priority": "low",
+          "action_type": "research",
+          "scheduled_start": "2026-02-24T05:59:05.000Z",
+          "depends_on": [
+            "task_01"
+          ]
+        },
+        {
+          "id": "task_03",
+          "title": "Check if product is already running",
+          "description": "Check if the product is already running and if it's not, proceed to the next step.",
+          "estimated_hours": 0.1,
+          "priority": "low",
+          "action_type": "deep_work",
+          "scheduled_start": "2026-02-24T05:59:10.000Z",
+          "depends_on": [
+            "task_02"
+          ]
+        },
+        {
+          "id": "task_04",
+          "title": "Run the product",
+          "description": "Run the product and ensure it's running correctly.",
+          "estimated_hours": 0.5,
+          "priority": "medium",
+          "action_type": "deep_work",
+          "scheduled_start": "2026-02-24T05:59:20.000Z",
+          "depends_on": [
+            "task_03"
+          ]
+        },
+        {
+          "id": "task_05",
+          "title": "Verify product performance",
+          "description": "Verify that the product is performing as expected and not taking more than 2 seconds.",
+          "estimated_hours": 0.1,
+          "priority": "high",
+          "action_type": "deep_work",
+          "scheduled_start": "2026-02-24T05:59:30.000Z",
+          "depends_on": [
+            "task_04"
+          ]
+        }
+      ],
+      "notes": "The deadline is very tight, so it's essential to work efficiently and make the most of the time available."
+    },
+    "execution_results": [
+      {
+        "task_id": "task_01",
+        "action": "create_calendar_event",
+        "event_id": "up27arop29u4ivp50l8ulk5cuk",
+        "event_link": "https://www.google.com/calendar/event?eid=dXAyN2Fyb3AyOXU0aXZwNTBsOHVsazVjdWsgc2hhcm1haGFyc2h1Mzg1QG0",
+        "success": true
+      },
+      {
+        "task_id": "task_02",
+        "action": "create_calendar_event",
+        "event_id": "0la7v7u652u9bo519kjpncthhs",
+        "event_link": "https://www.google.com/calendar/event?eid=MGxhN3Y3dTY1MnU5Ym81MTlranBuY3RoaHMgc2hhcm1haGFyc2h1Mzg1QG0",
+        "success": true
+      },
+      {
+        "task_id": "task_03",
+        "action": "create_calendar_event",
+        "event_id": "to6pup46uaho9949t0770vcvb4",
+        "event_link": "https://www.google.com/calendar/event?eid=dG82cHVwNDZ1YWhvOTk0OXQwNzcwdmN2YjQgc2hhcm1haGFyc2h1Mzg1QG0",
+        "success": true
+      },
+      {
+        "action": "send_daily_summary",
+        "success": true,
+        "email": "sharmaharshu385@gmail.com"
+      }
+    ],
+    "pending_approvals": [
+      {
+        "id": "task_01",
+        "title": "Check if product is already running",
+        "estimated_hours": 0.05,
+        "priority": "high",
+        "description": "Quickly check if the product is already running to avoid unnecessary work."
+      },
+      {
+        "id": "task_02",
+        "title": "Run the product",
+        "estimated_hours": 0.1,
+        "priority": "high",
+        "description": "Run the product to check its functionality."
+      },
+      {
+        "id": "task_03",
+        "title": "Verify product functionality",
+        "estimated_hours": 0.05,
+        "priority": "high",
+        "description": "Quickly verify that the product is working as expected."
+      }
+    ],
+    "action_log": [
+      {
+        "task_id": "task_01",
+        "action": "create_calendar_event",
+        "event_id": "up27arop29u4ivp50l8ulk5cuk",
+        "event_link": "https://www.google.com/calendar/event?eid=dXAyN2Fyb3AyOXU0aXZwNTBsOHVsazVjdWsgc2hhcm1haGFyc2h1Mzg1QG0",
+        "success": true
+      },
+      {
+        "task_id": "task_02",
+        "action": "create_calendar_event",
+        "event_id": "0la7v7u652u9bo519kjpncthhs",
+        "event_link": "https://www.google.com/calendar/event?eid=MGxhN3Y3dTY1MnU5Ym81MTlranBuY3RoaHMgc2hhcm1haGFyc2h1Mzg1QG0",
+        "success": true
+      },
+      {
+        "task_id": "task_03",
+        "action": "create_calendar_event",
+        "event_id": "to6pup46uaho9949t0770vcvb4",
+        "event_link": "https://www.google.com/calendar/event?eid=dG82cHVwNDZ1YWhvOTk0OXQwNzcwdmN2YjQgc2hhcm1haGFyc2h1Mzg1QG0",
+        "success": true
+      },
+      {
+        "action": "send_daily_summary",
+        "success": true,
+        "email": "sharmaharshu385@gmail.com"
+      }
+    ],
+    "status": "error",
+    "error": "Monitor failed after 3 attempts: JSON parse error: Extra data: line 11 column 1 (char 544)",
+    "replan_count": 0
+  }
+}
