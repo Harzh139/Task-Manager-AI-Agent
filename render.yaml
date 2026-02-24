@@ -1,0 +1,29 @@
+services:
+  - type: web
+    name: ai-productivity-agent
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: GROQ_API_KEY
+        sync: false
+      - key: GOOGLE_CLIENT_ID
+        sync: false
+      - key: GOOGLE_CLIENT_SECRET
+        sync: false
+      - key: GOOGLE_REDIRECT_URI
+        sync: false
+      - key: AUTONOMY_LEVEL
+        value: autonomous
+      - key: MAX_SUBTASKS
+        value: "5"
+      - key: LOG_LEVEL
+        value: INFO
+      - key: OAUTHLIB_INSECURE_TRANSPORT
+        value: "0"
+      - key: OAUTHLIB_RELAX_TOKEN_SCOPE
+        value: "1"
+    disk:
+      name: memory-store
+      mountPath: /opt/render/project/src/memory
+      sizeGB: 1
