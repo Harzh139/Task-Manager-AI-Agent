@@ -478,10 +478,13 @@ async def health_check():
 
 
 # ── Static frontend ────────────────────────────────────────────────────────────
-
-frontend_path = Path(__file__).parent.parent / "frontend"
+# Check same dir as main.py first (Render), then parent dir (local dev)
+_here = Path(__file__).parent
+frontend_path = _here / "frontend" if (_here / "frontend").exists() else _here.parent / "frontend"
 if frontend_path.exists():
     app.mount("/", StaticFiles(directory=str(frontend_path), html=True), name="frontend")
+else:
+    logger.warning("Frontend not found at %s — API-only mode.", frontend_path)
 
 
 # ── Entry Point ────────────────────────────────────────────────────────────────

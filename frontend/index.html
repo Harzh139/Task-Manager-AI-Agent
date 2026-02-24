@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Productivity Agent — Dashboard</title>
+  <meta name="description"
+    content="Multi-Agent Autonomous Productivity System — manage goals, tasks, and schedules with AI." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="style.css?v=2" />
+</head>
+
+<body>
+
+  <!-- ─── Background orbs ──────────────────────────────────────────────────── -->
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+  <div class="bg-orb orb-3"></div>
+
+  <!-- ─── Sidebar ─────────────────────────────────────────────────────────── -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <span class="brand-icon">⚡</span>
+      <div>
+        <div class="brand-name">AI Productivity</div>
+        <div class="brand-sub">Agent System v1.0</div>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <button class="nav-item active" data-tab="dashboard" onclick="switchTab('dashboard',this)">
+        <span class="nav-icon">🏠</span> Dashboard
+      </button>
+      <button class="nav-item" data-tab="goal" onclick="switchTab('goal',this)">
+        <span class="nav-icon">🎯</span> New Goal
+      </button>
+      <button class="nav-item" data-tab="today" onclick="switchTab('today',this)">
+        <span class="nav-icon">📅</span> Today's Plan
+      </button>
+      <button class="nav-item" data-tab="review" onclick="switchTab('review',this)">
+        <span class="nav-icon">🔍</span> Weekly Review
+      </button>
+      <button class="nav-item" data-tab="log" onclick="switchTab('log',this)">
+        <span class="nav-icon">📋</span> Action Log
+      </button>
+      <button class="nav-item" data-tab="settings" onclick="switchTab('settings',this)">
+        <span class="nav-icon">⚙️</span> Settings
+      </button>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="auth-status" id="authStatus">
+        <span class="status-dot" id="authDot"></span>
+        <span id="authLabel">Checking auth…</span>
+      </div>
+      <a href="/auth/login" class="btn-auth" id="loginBtn">Connect Google</a>
+    </div>
+  </aside>
+
+  <!-- ─── Main Content ──────────────────────────────────────────────────────── -->
+  <main class="main-content">
+
+    <!-- Top bar -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <h1 id="pageTitle" class="page-title">Dashboard</h1>
+        <span id="pageSubtitle" class="page-subtitle">Your AI-powered productivity command centre</span>
+      </div>
+      <div class="topbar-right">
+        <div class="score-badge" id="topScoreBadge" title="Productivity Score">
+          <span class="score-icon">⚡</span>
+          <span id="topScore">—</span>/10
+        </div>
+        <div class="clock" id="clock"></div>
+      </div>
+    </header>
+
+    <!-- ── TAB: Dashboard ──────────────────────────────────────────────────── -->
+    <section class="tab-content active" id="tab-dashboard">
+      <div class="stats-grid">
+        <div class="stat-card" id="statGoal">
+          <div class="stat-icon">🎯</div>
+          <div class="stat-info">
+            <div class="stat-value" id="statGoalVal">—</div>
+            <div class="stat-label">Active Goal</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">✅</div>
+          <div class="stat-info">
+            <div class="stat-value" id="statDone">—</div>
+            <div class="stat-label">Tasks Completed</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">⏰</div>
+          <div class="stat-info">
+            <div class="stat-value" id="statPending">—</div>
+            <div class="stat-label">Pending Tasks</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">📊</div>
+          <div class="stat-info">
+            <div class="stat-value" id="statScore">—</div>
+            <div class="stat-label">Productivity Score</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="two-col">
+        <!-- Today's quick view -->
+        <div class="card">
+          <div class="card-header">
+            <h2>📅 Today's Tasks</h2>
+            <button class="btn-sm" onclick="loadToday()">Refresh</button>
+          </div>
+          <div id="todayTaskList" class="task-list-compact">
+            <p class="muted">No tasks yet. Submit a goal to get started.</p>
+          </div>
+        </div>
+
+        <!-- Monitor quick report -->
+        <div class="card">
+          <div class="card-header">
+            <h2>🔬 Monitor Report</h2>
+            <span id="healthBadge" class="health-badge">—</span>
+          </div>
+          <div id="monitorSummary" class="monitor-report">
+            <p class="muted">No monitoring data yet.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Upcoming deadlines -->
+      <div class="card mt">
+        <div class="card-header">
+          <h2>📆 Upcoming Calendar Events</h2>
+          <button class="btn-sm" onclick="loadToday()">Refresh</button>
+        </div>
+        <div id="calendarSection" class="calendar-events">
+          <p class="muted">Authenticate with Google to see calendar events.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── TAB: New Goal ───────────────────────────────────────────────────── -->
+    <section class="tab-content" id="tab-goal">
+      <div class="card goal-card">
+        <div class="goal-hero">
+          <div class="goal-hero-icon">🚀</div>
+          <h2>Set a New Productivity Goal</h2>
+          <p class="muted">Describe your goal in natural language. The AI will plan, schedule, and track it for you.</p>
+        </div>
+
+        <div class="form-group">
+          <label for="goalInput">Your Goal</label>
+          <textarea id="goalInput" rows="3"
+            placeholder="e.g., Finish my ML assignment and submit it by Friday"></textarea>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="deadlineInput">Deadline (optional)</label>
+            <input type="datetime-local" id="deadlineInput" />
+          </div>
+          <div class="form-group">
+            <label for="emailInput">Your Email (for summaries)</label>
+            <input type="email" id="emailInput" placeholder="you@example.com" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Autonomy Level</label>
+          <div class="autonomy-buttons">
+            <button class="autonomy-btn" data-level="manual" onclick="setAutonomy('manual',this)">
+              🔒 Manual<span>You approve every action</span>
+            </button>
+            <button class="autonomy-btn active" data-level="assisted" onclick="setAutonomy('assisted',this)">
+              🤝 Assisted<span>AI suggests, you approve</span>
+            </button>
+            <button class="autonomy-btn" data-level="autonomous" onclick="setAutonomy('autonomous',this)">
+              🤖 Autonomous<span>Fully automated</span>
+            </button>
+          </div>
+        </div>
+
+        <button class="btn-primary" id="submitGoalBtn" onclick="submitGoal()">
+          <span id="submitBtnText">⚡ Launch AI Agents</span>
+          <div class="btn-loader hidden" id="submitLoader"></div>
+        </button>
+      </div>
+
+      <!-- Result display -->
+      <div id="goalResult" class="hidden">
+        <div class="card mt" id="planCard">
+          <div class="card-header">
+            <h2>📋 AI Generated Plan</h2>
+            <span id="planStatus" class="badge"></span>
+          </div>
+          <div id="planSummary"></div>
+          <div id="subtaskList" class="subtask-grid"></div>
+        </div>
+
+        <!-- Approval panel (manual/assisted) -->
+        <div class="card mt hidden" id="approvalCard">
+          <div class="card-header">
+            <h2>✅ Approve Actions</h2>
+            <span class="badge warning">Awaiting Approval</span>
+          </div>
+          <p class="muted">Select the tasks you wish to schedule on your Calendar:</p>
+          <div id="approvalList"></div>
+          <button class="btn-primary mt" id="approveBtn" onclick="approveActions()">
+            Approve Selected & Execute
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── TAB: Today's Plan ───────────────────────────────────────────────── -->
+    <section class="tab-content" id="tab-today">
+      <div class="card">
+        <div class="card-header">
+          <h2>📅 Today's Full Plan</h2>
+          <button class="btn-sm" onclick="loadToday()">↺ Refresh</button>
+        </div>
+        <div id="todayFull">
+          <p class="muted">Loading…</p>
+        </div>
+      </div>
+      <div class="card mt">
+        <div class="card-header">
+          <h2>📆 Today's Calendar Events</h2>
+        </div>
+        <div id="todayCalendarFull" class="calendar-events">
+          <p class="muted">Loading…</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── TAB: Weekly Review ──────────────────────────────────────────────── -->
+    <section class="tab-content" id="tab-review">
+      <div id="reviewContent">
+        <div class="card">
+          <p class="muted" style="text-align:center;padding:40px">Loading weekly review…</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── TAB: Action Log ────────────────────────────────────────────────── -->
+    <section class="tab-content" id="tab-log">
+      <div class="card">
+        <div class="card-header">
+          <h2>📋 Action Log</h2>
+          <button class="btn-sm" onclick="loadLog()">↺ Refresh</button>
+        </div>
+        <div id="logContent" class="log-container">
+          <p class="muted">No actions logged yet.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── TAB: Settings ──────────────────────────────────────────────────── -->
+    <section class="tab-content" id="tab-settings">
+      <div class="card">
+        <div class="card-header">
+          <h2>⚙️ System Settings</h2>
+        </div>
+        <div class="settings-grid">
+          <div class="setting-item">
+            <label>API Base URL</label>
+            <input type="text" id="apiBaseUrl" value="http://localhost:8000" />
+            <small>Change if your backend runs on a different port.</small>
+          </div>
+          <div class="setting-item">
+            <label>Default Autonomy Level</label>
+            <select id="defaultAutonomy">
+              <option value="manual">Manual</option>
+              <option value="assisted" selected>Assisted</option>
+              <option value="autonomous">Autonomous</option>
+            </select>
+          </div>
+          <div class="setting-item">
+            <label>Google Authentication</label>
+            <a href="/auth/login" class="btn-primary" style="display:inline-block;text-decoration:none">Connect Google
+              Account</a>
+            <small>Required for Calendar & Gmail integration.</small>
+          </div>
+          <div class="setting-item">
+            <label>API Documentation</label>
+            <a href="/docs" target="_blank" class="btn-sm" style="text-decoration:none">Open Swagger UI →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mt">
+        <div class="card-header">
+          <h2>🏗 Architecture Overview</h2>
+        </div>
+        <div class="arch-grid">
+          <div class="arch-agent">
+            <div class="arch-icon">🧠</div>
+            <h3>Planner Agent</h3>
+            <p>Breaks goals into time-boxed subtasks using GPT-4o with FAISS memory context.</p>
+          </div>
+          <div class="arch-agent">
+            <div class="arch-icon">⚡</div>
+            <h3>Executor Agent</h3>
+            <p>Creates Calendar events & sends Gmail summaries respecting your autonomy level.</p>
+          </div>
+          <div class="arch-agent">
+            <div class="arch-icon">📡</div>
+            <h3>Monitor Agent</h3>
+            <p>Checks deadlines daily, detects delays, and triggers adaptive replanning.</p>
+          </div>
+          <div class="arch-agent">
+            <div class="arch-icon">🪞</div>
+            <h3>Reflection Agent</h3>
+            <p>Weekly productivity review, pattern analysis, and FAISS memory updates.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ─── Toast ──────────────────────────────────────────────────────────────── -->
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="app.js?v=2"></script>
+</body>
+
+</html>
